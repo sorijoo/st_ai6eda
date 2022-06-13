@@ -1,3 +1,4 @@
+import streamlit.components.v1 as components
 import pandas as pd 
 import networkx as nx
 from pyvis import network as net
@@ -107,4 +108,6 @@ for name in rel_melt[(rel_melt['variable']==8) & (rel_melt['value']=="-")]["Ïù¥Î
 # got_net.show_buttons(filter_=['physics'])
 # got_net.show_buttons(filter_=['nodes'])
 # got_net.show_buttons(filter_=['edges'])
-got_net.show("example.html")
+got_net.save_graph("example.html")
+file = open("example.html","r",encoding="UTF-8")
+components.html(file.read(),height=800)
