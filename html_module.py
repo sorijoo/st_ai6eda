@@ -31,7 +31,7 @@ def section(text, width=200):
             box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.125);
         ">
             <h5 style="padding:4px;color:white;cursor:default;">
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-duotone fa-computer-classic"></i> 
                 &nbsp;{text}
             </h5>
         </div>
