@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np 
 from html_module import section, callout, line_break, title
 from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 
 
 
@@ -73,6 +74,9 @@ y = df[label_name]
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, stratify = y, test_size = 0.2, random_state = 42)
 
+
+## 모델 선택 - 로지스틱 리그레션
+
 section('Logistic Regression', 300)
 col1, col2 = st.columns(2)
 with col1:
@@ -89,7 +93,7 @@ with col2:
 
 line_break()
 
-model_lr = st.button('모델링 Start')
+model_lr = st.button('Logistic Regression 모델링 Start')
 
 if model_lr:
     # lr_params = set_lr_params(penalty, c, solver, max_iter)
@@ -105,8 +109,48 @@ if model_lr:
 
     y_predict = lr_model.predict(X_test)
     score = scoreModel(lr_model, X_train, X_test, y_train, y_test)
-    st.write(score)
+    st.write("이 모델의 예측력은 : ", round(score,3))
    
+
+## 모델 선택 - 로지스틱 리그레션
+
+section('Random Forest', 300)
+col1, col2 = st.columns(2)
+with col1:
+    # metric = st.radio('metric', ['mae', 'mse', 'rmse'])
+    n_estimators = int(st.slider('N estimators', 5, 10, 30))
+    line_break()
+    min_samples_split = int(st.slider('Min samples split', 1, 5, 30))
+    line_break()
+    min_samples_leaf = float(st.slider('Min samples leaf', 0.0, 0.3, 0.5))
+
+
+with col2:
+    max_depth= float(st.slider('Max depth', 1, 3, 10))
+    line_break()
+    max_leaf_nodes= int(st.slider('Max leaf nodes', 1, 3, 10))
+ 
+
+line_break()
+
+model_rf = st.button('Random Forest 모델링 Start')
+
+if model_rf:
+    # lr_params = set_lr_params(penalty, c, solver, max_iter)
+    rf = RandomForestClassifier(n_estimators=n_estimators, min_samples_split=min_samples_split, min_samples_leaf=min_samples_leaf, max_depth=max_depth, max_leaf_nodes=max_leaf_nodes)
+
+    # my_bar = st.progress(0)
+    rf_model_state = st.text('인생을 예측하는 데에는 시간이 걸립니다')
+    rf_model = rf.fit(X_train, y_train)
+    # for percent_complete in range(100):
+    # time.sleep(0.1)
+    # my_bar.progress(percent_complete + 1)
+    rf_model_state.success("모델링 완료")
+
+    y_predict = rf_model.predict(X_test)
+    score = scoreModel(rf_model, X_train, X_test, y_train, y_test)
+    st.write("이 모델의 예측력은 : ", round(score,3))
+
 
 
 
