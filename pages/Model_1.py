@@ -1,8 +1,9 @@
 import streamlit as st 
 import pandas as pd 
 import numpy as np 
-from sklearn.linear_model import LogisticRegression
-import os
+from sklearn import datasets
+from sklearn.ensemble import RandomForestClassifier
+from html_module import section, callout, line_break, title
 
 st.title("MAKE YOUR OWN MACHINE LEARNIG MODEL!")
 
@@ -51,7 +52,7 @@ def scoreModel(model, X_train, X_valid, y_train, y_valid):
     print("검증 세트 정확도: {:.3f}".format(valid_score))
     return valid_score        
 
-
+from sklearn.linear_model import LogisticRegression
 lr = LogisticRegression()
 
 
