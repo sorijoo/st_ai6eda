@@ -14,16 +14,6 @@ this app predict Employee's Future
 """)
 
 
-
-def set_lr_params(penalty, c, solver, max_iter):
-    lr_params = {
-        'penalty': penalty,
-        'c': c,
-        'solver': solver,
-        'max_iter': max_iter
-    }
-    return lr_params
-
 def ConvertEducation(x):
     if x == "Bachelors":
         return 1
@@ -74,7 +64,8 @@ label_name = "LeaveOrNot"
 feature_names = df.columns.tolist()
 
 no = [label_name, 'Education', 'City', 'Gender','EverBenched']
-[feature_names.remove(i) for i in no]
+for i in no:
+    feature_names.remove(i) 
 
 X = df[feature_names]
 y = df[label_name]
@@ -82,18 +73,18 @@ y = df[label_name]
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, stratify = y, test_size = 0.2, random_state = 42)
 
-section('파라미터 설정하여 모델링하기', 300)
+section('Logistic Regression', 300)
 col1, col2 = st.columns(2)
 with col1:
     # metric = st.radio('metric', ['mae', 'mse', 'rmse'])
-    penalty = st.selectbox('Penalty', ('l1', 'l2', 'none'))
+    penalty = st.selectbox('Penalty', ('l2', 'none'))
     line_break()
-    c = float(st.slider('C', 0.0, 100.0, 1.0))
+    c = float(st.slider('c', 0.0, 100.0, 1.0))
 
 with col2:
-    solver = st.selectbox('Solver', ('newton-cg', 'lbfgs', 'liblinear','sag','saga'))
+    solver = st.selectbox('solver', ('newton-cg','lbfgs', 'liblinear','sag','saga'))
     line_break()
-    max_iter = float(st.slider('Max_iter', 500.0, 10000.0, 1000.0))
+    max_iter = float(st.slider('max_iter', 500.0, 10000.0, 1000.0))
  
 
 line_break()
@@ -101,11 +92,11 @@ line_break()
 model_lr = st.button('모델링 Start')
 
 if model_lr:
-    lr_params = set_lr_params(penalty, c, solver, max_iter)
-    lr = LogisticRegression(lr_params)
+    # lr_params = set_lr_params(penalty, c, solver, max_iter)
+    lr = LogisticRegression(penalty=penalty, C=c, solver=solver, max_iter=max_iter)
 
     # my_bar = st.progress(0)
-    lr_model_state = st.text('2분은 족히 넘게 걸립니다. 조금만 기다려 주세요 Loading...')
+    lr_model_state = st.text('인생을 예측하는 데에는 시간이 걸립니다')
     lr_model = lr.fit(X_train, y_train)
     # for percent_complete in range(100):
     # time.sleep(0.1)
@@ -113,8 +104,8 @@ if model_lr:
     lr_model_state.success("모델링 완료")
 
     y_predict = lr_model.predict(X_test)
-    score = scoreModel(model_lr, X_train, X_test, y_train, y_test)
-    print(score)
+    score = scoreModel(lr_model, X_train, X_test, y_train, y_test)
+    st.write(score)
    
 
 
