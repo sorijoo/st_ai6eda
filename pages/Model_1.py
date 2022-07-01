@@ -105,7 +105,7 @@ if model_lr:
 
     # my_bar = st.progress(0)
     lr_model_state = st.text('2분은 족히 넘게 걸립니다. 조금만 기다려 주세요 Loading...')
-    lr_model = lr.fit(X_train, y_train, params)
+    lr_model = lr.fit(X_train, y_train, lr_params)
     # for percent_complete in range(100):
     # time.sleep(0.1)
     # my_bar.progress(percent_complete + 1)
