@@ -126,7 +126,7 @@ with col1:
 
 
 with col2:
-    max_depth= float(st.slider('Max depth', 1, 3, 10))
+    max_depth= int(st.slider('Max depth', 1, 3, 10))
     line_break()
     max_leaf_nodes= int(st.slider('Max leaf nodes', 1, 3, 10))
  
