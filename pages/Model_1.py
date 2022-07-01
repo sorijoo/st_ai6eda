@@ -101,7 +101,7 @@ line_break()
 model_lr = st.button('모델링 Start')
 
 if model_lr:
-    params = set_lr_params(penalty, c, solver, max_iter)
+    lr_params = set_lr_params(penalty, c, solver, max_iter)
 
     # my_bar = st.progress(0)
     lr_model_state = st.text('2분은 족히 넘게 걸립니다. 조금만 기다려 주세요 Loading...')
