@@ -1,6 +1,7 @@
 import streamlit as st 
 import pandas as pd 
 import numpy as np 
+from html_module import section, callout, line_break, title
 from sklearn.linear_model import LogisticRegression
 
 
