@@ -6,7 +6,7 @@ from sklearn.linear_model import LogisticRegression
 
 
 
-st.title("MAKE YOUR OWN MACHINE LEARNIG MODEL!")
+st.title("MAKE YOUR OWN MACHINE LEARNING MODEL!")
 
 st.write("""
 # Employee Future Prediction
@@ -16,7 +16,7 @@ this app predict Employee's Future
 
 
 def set_lr_params(penalty, c, solver, max_iter):
-    params = {
+    lr_params = {
         'penalty': penalty,
         'c': c,
         'solver': solver,
