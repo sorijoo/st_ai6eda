@@ -53,7 +53,7 @@ def scoreModel(model, X_train, X_valid, y_train, y_valid):
     return valid_score        
 
 
-lr = LogisticRegression()
+
 
 
 df = pd.read_csv("data/Employee.csv")
@@ -102,10 +102,11 @@ model_lr = st.button('모델링 Start')
 
 if model_lr:
     lr_params = set_lr_params(penalty, c, solver, max_iter)
+    lr = LogisticRegression(lr_params)
 
     # my_bar = st.progress(0)
     lr_model_state = st.text('2분은 족히 넘게 걸립니다. 조금만 기다려 주세요 Loading...')
-    lr_model = lr.fit(X_train, y_train, lr_params)
+    lr_model = lr.fit(X_train, y_train)
     # for percent_complete in range(100):
     # time.sleep(0.1)
     # my_bar.progress(percent_complete + 1)
