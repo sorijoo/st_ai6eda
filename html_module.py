@@ -22,8 +22,8 @@ def section(text, width=200):
         <br/>
         <div style="
             width:{width}px;
-            background: rgb(220,172,255);
-            background: linear-gradient(20deg, rgba(220,172,255,1) 0%, rgba(105,146,230,1) 100%);
+            background: rgb(30, 214, 82);
+            background: linear-gradient(20deg, rgba(30, 214, 82,1) 0%, rgba(65, 99, 250,1) 100%);
             padding:7px;
             border:none;
             border-radius:10px;
@@ -31,7 +31,7 @@ def section(text, width=200):
             box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.125);
         ">
             <h5 style="padding:4px;color:white;cursor:default;">
-                <i class="fa-duotone fa-computer-classic"></i> 
+                <i class="fa-solid fa-magnifying-glass"></i>
                 &nbsp;{text}
             </h5>
         </div>
