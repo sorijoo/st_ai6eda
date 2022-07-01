@@ -1,9 +1,9 @@
 import streamlit as st 
 import pandas as pd 
 import numpy as np 
-from sklearn import datasets
-from sklearn.ensemble import RandomForestClassifier
-from html_module import section, callout, line_break, title
+from sklearn.linear_model import LogisticRegression
+
+
 
 st.title("MAKE YOUR OWN MACHINE LEARNIG MODEL!")
 
@@ -13,7 +13,6 @@ this app predict Employee's Future
 """)
 
 
-st.sidebar.header("User input parameter")
 
 def set_lr_params(penalty, c, solver, max_iter):
     params = {
@@ -52,7 +51,7 @@ def scoreModel(model, X_train, X_valid, y_train, y_valid):
     print("검증 세트 정확도: {:.3f}".format(valid_score))
     return valid_score        
 
-from sklearn.linear_model import LogisticRegression
+
 lr = LogisticRegression()
 
 
@@ -101,7 +100,7 @@ line_break()
 model_lr = st.button('모델링 Start')
 
 if model_lr:
-    params = set_params(penalty, c, solver, max_iter)
+    params = set_lr_params(penalty, c, solver, max_iter)
 
     # my_bar = st.progress(0)
     lr_model_state = st.text('2분은 족히 넘게 걸립니다. 조금만 기다려 주세요 Loading...')
