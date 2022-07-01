@@ -17,8 +17,8 @@ this app predict Employee's Future
 
 def set_lr_params(penalty, c, solver, max_iter):
     params = {
-        'Penalty': penalty,
-        'C': c,
+        'penalty': penalty,
+        'c': c,
         'solver': solver,
         'max_iter': max_iter
     }
@@ -86,14 +86,14 @@ section('파라미터 설정하여 모델링하기', 300)
 col1, col2 = st.columns(2)
 with col1:
     # metric = st.radio('metric', ['mae', 'mse', 'rmse'])
-    penalty = st.selectbox('penalty', ('l1', 'l2', 'none'))
+    penalty = st.selectbox('Penalty', ('l1', 'l2', 'none'))
     line_break()
     c = float(st.slider('C', 0.0, 100.0, 1.0))
 
 with col2:
     solver = st.selectbox('Solver', ('newton-cg', 'lbfgs', 'liblinear','sag','saga'))
     line_break()
-    max_iter = float(st.slider('max_iter', 500.0, 10000.0, 1000.0))
+    max_iter = float(st.slider('Max_iter', 500.0, 10000.0, 1000.0))
  
 
 line_break()
