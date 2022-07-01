@@ -4,6 +4,8 @@ import numpy as np
 from html_module import section, callout, line_break, title
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import KNeighborsClassifier
+
 
 
 
@@ -83,12 +85,12 @@ with col1:
     # metric = st.radio('metric', ['mae', 'mse', 'rmse'])
     penalty = st.selectbox('Penalty', ('l2', 'none'))
     line_break()
-    c = float(st.slider('c', 0.0, 100.0, 10.0))
+    c = float(st.slider('C', 0.0, 100.0, 10.0))
 
 with col2:
-    solver = st.selectbox('solver', ('newton-cg','lbfgs', 'liblinear','sag','saga'))
+    solver = st.selectbox('Solver', ('newton-cg','lbfgs', 'liblinear','sag','saga'))
     line_break()
-    max_iter = float(st.slider('max_iter', 500.0, 10000.0, 7000.0))
+    max_iter = float(st.slider('Max iter', 500.0, 10000.0, 7000.0))
  
 
 line_break()
@@ -112,7 +114,7 @@ if model_lr:
     st.write("이 모델의 예측력은 : ", round(score,3))
    
 
-## 모델 선택 - 로지스틱 리그레션
+## 모델 선택 - 랜덤 포레스트
 
 section('Random Forest', 300)
 col1, col2 = st.columns(2)
@@ -153,20 +155,41 @@ if model_rf:
 
 
 
+#세번째 모델
+
+section('K-Nearest Neighbors', 300)
+col1, col2 = st.columns(2)
+with col1:
+    # metric = st.radio('metric', ['mae', 'mse', 'rmse'])
+    n_neighbors = int(st.slider('N neighbors', 2, 30, 5))
+    line_break()
+    weights = st.selectbox('Weight', ('uniform', 'distance'))
+    
 
 
+with col2:
+    leaf_size= int(st.slider('Max depth', 1, 100, 30))
+    line_break()
+    algorithm = st.selectbox('Algorithm', ('auto', 'ball_tree', 'kd_tree', 'brute'))
+ 
 
-# clf=RandomForestClassifier()
-# clf.fit(X,Y)
+line_break()
 
-# y_predict = lr.fit(X_train, y_train).predict(X_test)
-# # prediction_proba=clf.predict_proba(df)
+model_knn = st.button('K-Nearest Neighbors 모델링 Start')
 
-# st.subheader('class label and there corresponding index number ')
-# st.write(iris.target_names)
+if model_knn:
+    # lr_params = set_lr_params(penalty, c, solver, max_iter)
+    knn = KNeighborsClassifier(n_neighbors=n_neighbors, weights=weights, leaf_size=leaf_size, algorithm=algorithm)
+    # my_bar = st.progress(0)
+    knn_model_state = st.text('인생을 예측하는 데에는 시간이 걸립니다')
+    knn_model = knn.fit(X_train, y_train)
+    # for percent_complete in range(100):
+    # time.sleep(0.1)
+    # my_bar.progress(percent_complete + 1)
+    knn_model_state.success("모델링 완료")
 
-# st.subheader('prediction ')
-# st.write(iris.target_names[prediction])
+    y_predict = knn_model.predict(X_test)
+    score = scoreModel(knn_model, X_train, X_test, y_train, y_test)
+    st.write("이 모델의 예측력은 : ", round(score,3))
 
-# st.subheader('prediction probability ')
-# st.write(prediction_proba)
+
