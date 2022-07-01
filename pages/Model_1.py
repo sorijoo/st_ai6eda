@@ -83,12 +83,12 @@ with col1:
     # metric = st.radio('metric', ['mae', 'mse', 'rmse'])
     penalty = st.selectbox('Penalty', ('l2', 'none'))
     line_break()
-    c = float(st.slider('c', 0.0, 100.0, 1.0))
+    c = float(st.slider('c', 0.0, 100.0, 10.0))
 
 with col2:
     solver = st.selectbox('solver', ('newton-cg','lbfgs', 'liblinear','sag','saga'))
     line_break()
-    max_iter = float(st.slider('max_iter', 500.0, 10000.0, 1000.0))
+    max_iter = float(st.slider('max_iter', 500.0, 10000.0, 7000.0))
  
 
 line_break()
@@ -118,17 +118,17 @@ section('Random Forest', 300)
 col1, col2 = st.columns(2)
 with col1:
     # metric = st.radio('metric', ['mae', 'mse', 'rmse'])
-    n_estimators = int(st.slider('N estimators', 5, 10, 30))
+    n_estimators = int(st.slider('N estimators', 5, 30, 10))
     line_break()
-    min_samples_split = int(st.slider('Min samples split', 1, 5, 30))
+    min_samples_split = int(st.slider('Min samples split', 1, 30, 10))
     line_break()
-    min_samples_leaf = float(st.slider('Min samples leaf', 0.0, 0.3, 0.5))
+    min_samples_leaf = float(st.slider('Min samples leaf', 0.0, 0.5, 0.3))
 
 
 with col2:
-    max_depth= int(st.slider('Max depth', 1, 3, 10))
+    max_depth= int(st.slider('Max depth', 1, 10, 3))
     line_break()
-    max_leaf_nodes= int(st.slider('Max leaf nodes', 1, 3, 10))
+    max_leaf_nodes= int(st.slider('Max leaf nodes', 1, 10, 3))
  
 
 line_break()
