@@ -111,7 +111,7 @@ if model_lr:
 
     y_predict = lr_model.predict(X_test)
     score = scoreModel(lr_model, X_train, X_test, y_train, y_test)
-    st.write("이 모델의 예측력은 : ", round(score,3))
+    st.metric("이 모델의 정확도는 : ", round(score,3))
    
 
 ## 모델 선택 - 랜덤 포레스트
@@ -151,7 +151,7 @@ if model_rf:
 
     y_predict = rf_model.predict(X_test)
     score = scoreModel(rf_model, X_train, X_test, y_train, y_test)
-    st.write("이 모델의 예측력은 : ", round(score,3))
+    st.metric("이 모델의 정확도는 : ", round(score,3))
 
 
 
@@ -190,6 +190,20 @@ if model_knn:
 
     y_predict = knn_model.predict(X_test)
     score = scoreModel(knn_model, X_train, X_test, y_train, y_test)
-    st.write("이 모델의 예측력은 : ", round(score,3))
+    st.metric("이 모델의 정확도는 : ", round(score,3))
 
 
+# clf=RandomForestClassifier()
+# clf.fit(X,Y)
+
+# y_predict = lr.fit(X_train, y_train).predict(X_test)
+# # prediction_proba=clf.predict_proba(df)
+
+# st.subheader('class label and there corresponding index number ')
+# st.write(iris.target_names)
+
+# st.subheader('prediction ')
+# st.write(iris.target_names[prediction])
+
+# st.subheader('prediction probability ')
+# st.write(prediction_proba)
