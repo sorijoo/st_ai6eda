@@ -9,3 +9,4 @@ koreanize_matplotlib
 networkx
 pyvis
 pyvis.network
+sklearn
